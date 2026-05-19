@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿import React, { useEffect, useState } from 'react';
+﻿﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
 import { supabase } from '../lib/supabase';

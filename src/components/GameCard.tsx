@@ -1,5 +1,4 @@
-﻿import React from 'react'
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import '../css/GameCard.css'
 
 interface GameCardProps {
@@ -23,4 +22,3 @@ export default function GameCard({ name, description, slug }: GameCardProps) {
     </Link>
   )
 }
-

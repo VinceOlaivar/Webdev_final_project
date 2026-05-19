@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
@@ -84,8 +84,8 @@ export default function Tetris() {
     });
 
     let linesCleared = 0;
-    const clearedBoard = newBoard.reduce((acc: (number | string)[][], row) => {
-      if (row.every(cell => cell !== 0)) {
+    const clearedBoard = newBoard.reduce((acc: (number | string)[][], row: (number | string)[]) => {
+      if (row.every((cell: number | string) => cell !== 0)) {
         linesCleared++;
         acc.unshift(Array(COLS).fill(0));
       } else {
@@ -118,7 +118,7 @@ export default function Tetris() {
   const rotate = useCallback((p: any, currentBoard: any[][]) => {
     if (!p || gameOver) return;
     const m = p.shape;
-    const rotated = m[0].map((_, i) => m.map(row => row[i]).reverse());
+    const rotated = m[0].map((_: any, i: number) => m.map((row: any[]) => row[i]).reverse());
     if (!checkCollision(p.pos, rotated, currentBoard)) {
       setActivePiece({ ...p, shape: rotated });
     }

@@ -1,5 +1,4 @@
-﻿﻿import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+﻿﻿import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useAuth } from '../context/AuthContext'; // Import useAuth hook
 import { supabase } from '../lib/supabase'; // Import supabase for logout
 import '../css/Header.css'

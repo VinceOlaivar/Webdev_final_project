@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { saveScore } from '../../lib/supabase';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
