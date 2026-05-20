@@ -1,8 +1,9 @@
-﻿﻿import GameCard from '../components/GameCard'
+﻿﻿﻿﻿import GameCard from '../components/GameCard'
 import { Link } from 'react-router-dom'
 import GameGrid from '../components/GameGrid'
 import Container from '../components/Container'
 import Button from '../components/Button'
+import GlobalChat from '../components/GlobalChat'
 import '../css/Home.css'
 
 const games = [
@@ -37,6 +38,8 @@ export default function Home() {
             />
           ))}
         </GameGrid>
+
+        <GlobalChat />
 
         <div className="home-cta" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
           <Button variant="secondary">

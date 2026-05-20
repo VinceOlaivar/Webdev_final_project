@@ -1,11 +1,35 @@
-﻿﻿import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+﻿﻿﻿﻿import { Link, useNavigate } from 'react-router-dom'; 
+import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext'; // Import useAuth hook
 import { supabase } from '../lib/supabase'; // Import supabase for logout
 import '../css/Header.css'
 
 export default function Header() {
-  const { user, profile, loading } = useAuth(); // Get user, profile, and loading state from context
+  const { user, profile, loading } = useAuth() as any; // Get user, profile, and loading state from context
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminUsername, setAdminUsername] = useState<string | null>(null);
   const navigate = useNavigate(); // Initialize useNavigate
+  
+  const checkAdminStatus = useCallback(async () => {
+      if (user) {
+        // Ensure we never request the 'email' column from the admins table
+        const { data } = await supabase
+          .from('admins')
+          .select('id, username')
+          .eq('id', user.id)
+          .maybeSingle();
+        setIsAdmin(!!data);
+        if (data) setAdminUsername(data.username);
+      } else {
+        setIsAdmin(false);
+        setAdminUsername(null);
+      }
+  }, [user]);
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, [user]);
+  // Added checkAdminStatus to dependency array to satisfy exhaustive-deps, though user is already there.
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -27,6 +51,9 @@ export default function Header() {
           <Link to="/leaderboard" className="nav-link">
              Leaderboard
           </Link>
+          {user && isAdmin && (
+            <Link to="/admin" className="nav-link" style={{ color: '#fbbf24' }}>Admin Control</Link>
+          )}
           {loading ? (
             <span className="nav-link">Loading...</span>
           ) : user ? (
@@ -35,12 +62,15 @@ export default function Header() {
                 {profile?.avatar_url && (
                   <img src={profile.avatar_url} alt="Profile" style={{ width: '32px', height: '32px', borderRadius: '4px', border: '1px solid #3b82f6' }} />
                 )}
-                <span className="nav-link" style={{ color: '#a78bfa', cursor: 'default', paddingLeft: 0 }}>Welcome, {profile?.username || user.email?.split('@')[0] || 'Player'}!</span>
+                <span className="nav-link" style={{ color: '#a78bfa', cursor: 'default', paddingLeft: 0 }}>Welcome, {adminUsername || profile?.username || user.email?.split('@')[0] || 'Player'}!</span>
               </div>
               <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
             </>
           ) : (
-            <Link to="/login" className="nav-link">Login</Link>
+            <>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/admin-login" className="nav-link" style={{ color: '#fbbf24' }}>Admin Login</Link>
+            </>
           )}
         </nav>
       </div>

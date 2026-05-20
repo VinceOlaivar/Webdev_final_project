@@ -18,13 +18,36 @@ export default function Login() {
     setError(null)
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
       if (error) {
         setError(error.message)
+      } else if (data.user) {
+        // 1. Check if this user is an admin
+        const { data: adminData } = await supabase.from('admins').select('id').eq('id', data.user.id).maybeSingle();
+        
+        if (adminData) {
+          navigate('/admin');
+          return;
+        }
+
+        // 2. Check if the player is banned
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('is_banned')
+          .eq('id', data.user.id)
+          .maybeSingle();
+
+        if (profileData?.is_banned) {
+          await supabase.auth.signOut(); // Immediately destroy the unauthorized session
+          setError('Your account has been banned by an administrator.');
+          return;
+        }
+
+        navigate('/');
       } else {
         navigate('/');
       }

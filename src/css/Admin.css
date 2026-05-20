@@ -1,0 +1,158 @@
+.admin-page {
+  padding-top: 100px;
+  color: white;
+  min-height: 100vh;
+}
+
+.admin-dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.admin-dashboard-header h1 {
+  margin: 0;
+}
+
+.admin-logged-in-as {
+  color: #94a3b8;
+}
+
+.admin-logged-in-as .highlight {
+  color: #fbbf24;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.admin-dashboard-grid.two-cols {
+  grid-template-columns: 1fr 1fr;
+}
+
+.admin-dashboard-grid.one-col {
+  grid-template-columns: 1fr;
+}
+
+.admin-section-container {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.admin-section-title {
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead tr {
+  border-bottom: 1px solid #334155;
+  text-align: left;
+}
+
+.admin-table th, .admin-table td {
+  padding: 10px;
+}
+
+.admin-table tbody tr {
+  border-bottom: 1px solid #0f172a;
+}
+
+.admin-player-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-player-avatar {
+  width: 24px;
+  border-radius: 4px;
+}
+
+.status-active {
+  color: #4ade80;
+}
+
+.status-banned {
+  color: #f87171;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-btn-action {
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-btn-history {
+  background: #3b82f6;
+}
+
+.admin-btn-ban {
+  background: #f87171;
+}
+
+.admin-btn-unban {
+  background: #4ade80;
+}
+
+.admin-history-view {
+  background: #0f172a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #3b82f6;
+}
+
+.admin-history-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.admin-history-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.admin-btn-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.admin-history-empty {
+  color: #94a3b8;
+}
+
+.admin-history-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.admin-history-item {
+  padding: 10px;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-history-item .game-slug {
+  text-transform: capitalize;
+}
+
+.admin-history-item .date {
+  color: #64748b;
+  font-size: 12px;
+}

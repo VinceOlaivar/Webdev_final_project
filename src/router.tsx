@@ -13,6 +13,8 @@ import AboutUs from './pages/AboutUs'; // Import the new AboutUs component
 import Minesweeper from './pages/games/Minesweeper';
 import Breakout from './pages/games/Breakout';
 import Leaderboard from './pages/Leaderboard';
+import AdminLogin from './pages/AdminLogin';
+import Admin from './pages/Admin';
 
 export default function Router() {
   return (
@@ -21,6 +23,8 @@ export default function Router() {
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="admin-login" element={<AdminLogin />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="register" element={<Register />} />
           <Route path="game/snake" element={<Snake />} />
           <Route path="game/2048" element={<Game2048 />} />
