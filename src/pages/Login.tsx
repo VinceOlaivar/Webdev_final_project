@@ -7,6 +7,7 @@ import Button from '../components/Button'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate(); // Initialize useNavigate
@@ -54,13 +55,31 @@ export default function Login() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label style={{ fontSize: '14px', fontWeight: '500' }}>Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid #334155', background: '#0f172a', color: 'white', outline: 'none' }}
-              />
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  style={{ 
+                    padding: '0.75rem', 
+                    paddingRight: '3.5rem',
+                    borderRadius: '6px', 
+                    border: '1px solid #334155', 
+                    background: '#0f172a', 
+                    color: 'white', 
+                    outline: 'none',
+                    width: '100%'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{ position: 'absolute', right: '0.75rem', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: '600', color: '#60a5fa', textTransform: 'uppercase', padding: 0 }}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
             </div>
             {error && <p style={{ color: '#f87171', fontSize: '13px', margin: '0' }}>{error}</p>}
             <Button type="submit" disabled={loading} style={{ marginTop: '0.5rem' }}>
